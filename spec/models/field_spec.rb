@@ -8,4 +8,10 @@ describe Field do
     expect(field).to respond_to :set
     expect(field).to respond_to :items
   end
+
+  describe '#items' do
+    it 'should be two-dementional array' do
+      expect(field.items).to eql(Array.new(10, Array.new(15)))
+    end
+  end
 end
