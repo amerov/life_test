@@ -14,4 +14,23 @@ describe Field do
       expect(field.items).to eql(Array.new(10, Array.new(15)))
     end
   end
+
+  describe '#alive?' do
+    before do
+      field.set(1, 0, true)
+      field.set(1, 1, true)
+      field.set(9, 14, true)
+    end
+
+    it 'should be report whether the specified cell is alive' do
+      expect(field.alive?(1, 0)).to be_truthy
+    end
+
+    context 'x or y coordinates are outside the field boundaries' do
+      it 'should be wrapped toroidally' do
+        expect(field.alive?(-1, -1)).to be_truthy
+      end
+    end
+  end
 end
+
