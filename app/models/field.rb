@@ -7,11 +7,13 @@ class Field
   end
 
   def alive?(x, y)
-
+    _x = x + @width % @width
+    _y = y + @height % @height
+    @items[_x][_y]
   end
 
   def set(x, y, v)
-
+    @items[x][y] = v
   end
 
   def items
