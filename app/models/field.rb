@@ -1,8 +1,9 @@
 class Field
 
   def initialize(width:, height:)
-    @with = width
-    @hieght = height
+    @width = width
+    @height = height
+    set_items
   end
 
   def alive?(x, y)
@@ -14,7 +15,13 @@ class Field
   end
 
   def items
+    @items
+  end
 
+  private
+
+  def set_items
+    @items = Array.new(@width, Array.new(@height))
   end
 
 end
