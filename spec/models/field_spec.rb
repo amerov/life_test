@@ -11,7 +11,7 @@ describe Field do
 
   describe '#items' do
     it 'should be two-dementional array' do
-      expect(field.items).to eql(Array.new(10, Array.new(15)))
+      expect(field.items).to eql(Array.new(10, Array.new(15, false)))
     end
   end
 
@@ -43,7 +43,7 @@ describe Field do
         end
 
         it 'should be alive' do
-          expect(field.next(1, 1)).to eql(true)
+          expect(field.next(1, 1)).to be_truthy
         end
       end
 
@@ -51,7 +51,7 @@ describe Field do
         before do
           field.set(0, 0, true)
           field.set(0, 1, true)
-          field.set(1, 1, true)
+          field.set(1, 1, false)
         end
 
         it 'should be maintain current state' do
