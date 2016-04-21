@@ -32,5 +32,56 @@ describe Field do
       end
     end
   end
+
+  describe '#next' do
+    context 'current state is dead' do
+      context 'exactly 3 neighbors' do
+        before do
+          field.set(0, 0, true)
+          field.set(0, 1, true)
+          field.set(0, 2, true)
+        end
+
+        it 'should be alive' do
+          expect(field.next(1, 1)).to eql(true)
+        end
+      end
+
+      context 'exactly 2 neighbors' do
+        before do
+          field.set(0, 0, true)
+          field.set(0, 1, true)
+          field.set(1, 1, true)
+        end
+
+        it 'should be maintain current state' do
+          expect(field.next(1, 1)).to be_falsey
+        end
+      end
+    end
+
+    context 'current state is alive' do
+      before do
+        field.set(0, 0, true)
+        field.set(0, 1, true)
+        field.set(1, 1, true)
+      end
+
+      context 'exactly 2 neighbors' do
+        it 'should be maintain current state' do
+          expect(field.next(1, 1)).to be_truthy
+        end
+      end
+
+      context 'exactly 3 neighbors' do
+        before do
+          field.set(1, 2, true)
+        end
+        it 'should be dead' do
+          expect(field.next(1, 2)).to be_falsey
+        end
+      end
+    end
+  end
 end
 
