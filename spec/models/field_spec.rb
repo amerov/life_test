@@ -5,21 +5,22 @@ describe Field do
 
   it 'should be respond_to' do
     expect(field).to respond_to :alive?
-    expect(field).to respond_to :set
+    expect(field).to respond_to :alive!
+    expect(field).to respond_to :dead!
     expect(field).to respond_to :items
   end
 
   describe '#items' do
     it 'should be two-dementional array' do
-      expect(field.items).to eql(Array.new(15, Array.new(10, false)))
+      expect(field.items).to eql(Array.new(15) { Array.new(10) { false } })
     end
   end
 
   describe '#alive?' do
     before do
-      field.set(0, 0, true)
-      field.set(0, 1, true)
-      field.set(9, 14, true)
+      field.alive!(0, 0)
+      field.alive!(0, 1)
+      field.alive!(9, 14)
     end
 
     it 'should be report whether the specified cell is alive' do
@@ -37,9 +38,9 @@ describe Field do
     context 'current state is dead' do
       context 'exactly 3 neighbors' do
         before do
-          field.set(0, 0, true)
-          field.set(0, 1, true)
-          field.set(0, 2, true)
+          field.alive!(0, 0)
+          field.alive!(0, 1)
+          field.alive!(0, 2)
         end
 
         it 'should be alive' do
@@ -49,9 +50,9 @@ describe Field do
 
       context 'exactly 2 neighbors' do
         before do
-          field.set(0, 0, true)
-          field.set(0, 1, true)
-          field.set(1, 1, false)
+          field.alive!(0, 0)
+          field.alive!(0, 1)
+          field.dead!(1, 1)
         end
 
         it 'should be maintain current state' do
@@ -62,9 +63,9 @@ describe Field do
 
     context 'current state is alive' do
       before do
-        field.set(0, 0, true)
-        field.set(0, 1, true)
-        field.set(1, 1, true)
+        field.alive!(0, 0)
+        field.alive!(0, 1)
+        field.alive!(1, 1)
       end
 
       context 'exactly 2 neighbors' do
@@ -75,7 +76,7 @@ describe Field do
 
       context 'exactly 3 neighbors' do
         before do
-          field.set(2, 0, true)
+          field.alive!(2, 0)
         end
         it 'should be dead' do
           expect(field.next(1, 0)).to be_falsey
