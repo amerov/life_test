@@ -12,8 +12,12 @@ class Field
     @items[_y][_x]
   end
 
-  def set(x, y, v)
-    @items[y][x] = v
+  def alive!(x, y)
+    @items[y][x] = true
+  end
+
+  def dead!(x, y)
+    @items[y][x] = false
   end
 
   def items
