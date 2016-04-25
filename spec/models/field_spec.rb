@@ -11,19 +11,19 @@ describe Field do
 
   describe '#items' do
     it 'should be two-dementional array' do
-      expect(field.items).to eql(Array.new(10, Array.new(15, false)))
+      expect(field.items).to eql(Array.new(15, Array.new(10, false)))
     end
   end
 
   describe '#alive?' do
     before do
-      field.set(1, 0, true)
-      field.set(1, 1, true)
+      field.set(0, 0, true)
+      field.set(0, 1, true)
       field.set(9, 14, true)
     end
 
     it 'should be report whether the specified cell is alive' do
-      expect(field.alive?(1, 0)).to be_truthy
+      expect(field.alive?(0, 1)).to be_truthy
     end
 
     context 'x or y coordinates are outside the field boundaries' do
@@ -75,10 +75,10 @@ describe Field do
 
       context 'exactly 3 neighbors' do
         before do
-          field.set(1, 2, true)
+          field.set(2, 0, true)
         end
         it 'should be dead' do
-          expect(field.next(1, 2)).to be_falsey
+          expect(field.next(1, 0)).to be_falsey
         end
       end
     end
