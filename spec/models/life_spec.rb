@@ -19,6 +19,9 @@ describe Life do
   describe '#step' do
     it 'should be advances the game by one instant, recomputing and updating all cells' do
       expect(life).to respond_to :step
+      prev = life.next.items
+      life.step
+      expect(prev).to_not match_array(life.next.items)
     end
   end
 
