@@ -1,5 +1,7 @@
 class Field
 
+  attr_accessor :items
+
   def initialize(width:, height:)
     @width = width
     @height = height
@@ -20,9 +22,6 @@ class Field
     @items[y][x] = false
   end
 
-  def items
-    @items
-  end
 
   def next(x, y)
     alive = 0
