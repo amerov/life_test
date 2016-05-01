@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Life do
-  let(:life) { Life.new(width: 10, height: 15) }
+  let!(:life) { Life.new(width: 10, height: 15) }
 
   it "should be stores the state of a round of Conway's Game of Life" do
     expect(life).to respond_to :prev
@@ -18,8 +18,7 @@ describe Life do
 
   describe '#step' do
     it 'should be advances the game by one instant, recomputing and updating all cells' do
-      expect(life).to respond_to :step
-      prev = life.next.items
+      prev = life.prev.items.dup
       life.step
       expect(prev).to_not match_array(life.next.items)
     end
