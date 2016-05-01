@@ -1,12 +1,12 @@
 class LifeController
 
-  def initialize(count=100, width=50, height=50, slp=1)
+  def initialize(count:100, width:50, height:50, sleep:1)
     @count = count
     @width = width
     @height = height
     @life = Life.new(width: width, height: height)
     @view = LifeView.new
-    @slp = slp
+    @slp = sleep
   end
 
   def main_action
